@@ -43,9 +43,9 @@ services:
         args:
           - MYSQL_VERSION=5.7
       environment:
-        - MYSQL_DATABASE=default
-        - MYSQL_USER=default
-        - MYSQL_PASSWORD=root
+        - MYSQL_DATABASE=
+        - MYSQL_USER=
+        - MYSQL_PASSWORD=
         - MYSQL_ROOT_PASSWORD=root
       volumes:
         - ./data/mysql:/var/lib/mysql
