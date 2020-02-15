@@ -32,6 +32,7 @@ RUN set -xe; \
     imagick \
 && docker-php-ext-install \
     curl \
+    intl \
     iconv \
     mbstring \
     pdo \
