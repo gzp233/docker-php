@@ -39,22 +39,22 @@ services:
   #       - frontend
   #       - backend
 
-  mysql:
-      build:
-        context: ./mysql
-        args:
-          - MYSQL_VERSION=5.7
-      environment:
-        - MYSQL_DATABASE=
-        - MYSQL_USER=
-        - MYSQL_PASSWORD=
-        - MYSQL_ROOT_PASSWORD=root
-      volumes:
-        - ./data/mysql:/var/lib/mysql
-      ports:
-        - "3306:3306"
-      networks:
-        - backend
+  # mysql:
+  #     build:
+  #       context: ./mysql
+  #       args:
+  #         - MYSQL_VERSION=5.7
+  #     environment:
+  #       - MYSQL_DATABASE=
+  #       - MYSQL_USER=
+  #       - MYSQL_PASSWORD=
+  #       - MYSQL_ROOT_PASSWORD=root
+  #     volumes:
+  #       - ./data/mysql:/var/lib/mysql
+  #     ports:
+  #       - "3306:3306"
+  #     networks:
+  #       - backend
 
   mysql8:
     build:
@@ -82,17 +82,17 @@ services:
       networks:
         - backend
 
-  # clickhouse:
-  #     build: ./clickhouse
-  #     volumes:
-  #       - ./data/clickhouse:/var/lib/clickhouse
-  #       - ./clickhouse/config.xml:/etc/clickhouse-server/config.xml
-  #       - ./clickhouse/users.xml:/etc/clickhouse-server/users.xml
-  #       - ./log/clickhouse-server.log:/var/log/clickhouse-server/clickhouse-server.log
-  #       - ./log/clickhouse-server.err.log:/var/log/clickhouse-server/clickhouse-server.err.log
-  #     ports:
-  #       - "8123:8123"
-  #       - "9000:9000"
-  #       - "9004:9004"
-  #     networks:
-  #       - backend
+  clickhouse:
+      build: ./clickhouse
+      volumes:
+        - ./data/clickhouse:/var/lib/clickhouse
+        - ./clickhouse/config.xml:/etc/clickhouse-server/config.xml
+        - ./clickhouse/users.xml:/etc/clickhouse-server/users.xml
+        # - ./log/clickhouse-server.log:/var/log/clickhouse-server/clickhouse-server.log
+        # - ./log/clickhouse-server.err.log:/var/log/clickhouse-server/clickhouse-server.err.log
+      ports:
+        - "8123:8123"
+        - "9000:9000"
+        - "9004:9004"
+      networks:
+        - backend
