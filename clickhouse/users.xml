@@ -43,7 +43,7 @@
                  Execute: PASSWORD=$(base64 < /dev/urandom | head -c8); echo "$PASSWORD"; echo -n "$PASSWORD" | sha256sum | tr -d '-'
                  In first line will be password and in second - corresponding SHA256.
             -->
-            <password></password>
+            <password>default</password>
 
             <!-- List of networks with open access.
 
@@ -65,8 +65,8 @@
                  All results of DNS requests are cached till server restart.
             -->
             <networks incl="networks" replace="replace">
-                <ip>::1</ip>
-        <ip>127.0.0.1</ip>
+                <ip>::/0</ip>
+                <ip>0.0.0.0</ip>
             </networks>
 
             <!-- Settings profile for user. -->
