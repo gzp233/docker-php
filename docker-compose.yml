@@ -112,11 +112,11 @@ services:
       networks:
         - backend
   
-  captcha:
-      build: './captcha'
-      volumes:
-        - ./captcha/conf.py:/app/conf.py
-      ports:
-        - "9898:9898"
-      networks:
-        - backend
+  # captcha:
+  #     build: './captcha'
+  #     volumes:
+  #       - ./captcha/conf.py:/app/conf.py
+  #     ports:
+  #       - "9898:9898"
+  #     networks:
+  #       - backend
