@@ -71,6 +71,8 @@
 
             <!-- Settings profile for user. -->
             <profile>default</profile>
+            <os_thread_priority>19</os_thread_priority>
+            <max_threads>1</max_threads>
 
             <!-- Quota for user. -->
             <quota>default</quota>

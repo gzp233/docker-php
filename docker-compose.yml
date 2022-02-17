@@ -56,43 +56,67 @@ services:
   #     networks:
   #       - backend
 
-  mysql8:
-    build:
-      context: ./mysql8
-      args:
-        - MYSQL_VERSION=latest
-    environment:
-      - MYSQL_DATABASE=
-      - MYSQL_USER=
-      - MYSQL_PASSWORD=
-      - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - ./data/mysql8:/var/lib/mysql
-    ports:
-      - "3307:3307"
-    networks:
-      - backend
+  # mysql8:
+  #   build:
+  #     context: ./mysql8
+  #     args:
+  #       - MYSQL_VERSION=latest
+  #   environment:
+  #     - MYSQL_DATABASE=
+  #     - MYSQL_USER=
+  #     - MYSQL_PASSWORD=
+  #     - MYSQL_ROOT_PASSWORD=root
+  #   volumes:
+  #     - ./data/mysql8:/var/lib/mysql
+  #   ports:
+  #     - "3307:3307"
+  #   networks:
+  #     - backend
 
-  redis:
-      build: ./redis
+  # redis:
+  #     build: ./redis
+  #     volumes:
+  #       - ./data/redis:/data
+  #     ports:
+  #       - "6379:6379"
+  #     networks:
+  #       - backend
+
+  # clickhouse:
+  #     build: ./clickhouse
+  #     volumes:
+  #       - ./data/clickhouse:/var/lib/clickhouse
+  #       - ./clickhouse/config.xml:/etc/clickhouse-server/config.xml
+  #       - ./clickhouse/users.xml:/etc/clickhouse-server/users.xml
+  #       # - ./log/clickhouse-server.log:/var/log/clickhouse-server/clickhouse-server.log
+  #       # - ./log/clickhouse-server.err.log:/var/log/clickhouse-server/clickhouse-server.err.log
+  #     ports:
+  #       - "8123:8123"
+  #       - "9000:9000"
+  #       - "9004:9004"
+  #     networks:
+  #       - backend
+
+  mongo:
+      image: 'mongo'
+      environment:
+        - TZ=Asia/Shanghai
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=root
+        - MONGO_INITDB_DATABASE=amz_spider
       volumes:
-        - ./data/redis:/data
+        - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+        - ./data/mongo:/data/db:rw
       ports:
-        - "6379:6379"
+        - "27017:27017"
       networks:
         - backend
-
-  clickhouse:
-      build: ./clickhouse
+  
+  captcha:
+      build: './captcha'
       volumes:
-        - ./data/clickhouse:/var/lib/clickhouse
-        - ./clickhouse/config.xml:/etc/clickhouse-server/config.xml
-        - ./clickhouse/users.xml:/etc/clickhouse-server/users.xml
-        # - ./log/clickhouse-server.log:/var/log/clickhouse-server/clickhouse-server.log
-        # - ./log/clickhouse-server.err.log:/var/log/clickhouse-server/clickhouse-server.err.log
+        - ./captcha/conf.py:/app/conf.py
       ports:
-        - "8123:8123"
-        - "9000:9000"
-        - "9004:9004"
+        - "9898:9898"
       networks:
         - backend
