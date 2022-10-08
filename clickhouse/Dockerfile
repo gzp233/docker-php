@@ -1,4 +1,4 @@
-FROM yandex/clickhouse-server:22.6
+FROM clickhouse/clickhouse-server:22.6
 
 VOLUME /data
 
