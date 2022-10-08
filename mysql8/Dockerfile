@@ -1,4 +1,4 @@
-ARG MYSQL_VERSION=latest
+ARG MYSQL_VERSION=8.0.30
 FROM mysql:${MYSQL_VERSION}
 
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
